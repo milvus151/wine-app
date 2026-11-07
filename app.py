@@ -219,7 +219,7 @@ with batch_tab:
                         "В признаках есть пустые или нечисловые значения. "
                         "Проверьте CSV-файл."
                     )
-                elif not np.isinfinite(uploaded_features.to_numpy(dtype=float)).all():
+                elif not np.isfinite(uploaded_features.to_numpy(dtype=float)).all():
                     st.error(
                         "В признаках есть бесконечные значения (inf или -inf). "
                         "Проверьте CSV-файл."
