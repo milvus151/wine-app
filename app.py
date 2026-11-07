@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 import joblib
+import numpy as np
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -216,6 +217,11 @@ with batch_tab:
                 if uploaded_features.isna().any().any():
                     st.error(
                         "В признаках есть пустые или нечисловые значения. "
+                        "Проверьте CSV-файл."
+                    )
+                elif not np.isinfinite(uploaded_features.to_numpy(dtype=float)).all():
+                    st.error(
+                        "В признаках есть бесконечные значения (inf или -inf). "
                         "Проверьте CSV-файл."
                     )
                 elif not uploaded_features["is_red"].isin([0, 1]).all():
